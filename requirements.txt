@@ -1,4 +1,4 @@
 Flask
 yt-dlp
 requests
-APScheduler
+gunicorn
