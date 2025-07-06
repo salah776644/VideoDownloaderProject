@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شروط الاستخدام - تنزيل الفيديوهات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .policy-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: var(--card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .policy-container h2 {
+            font-size: var(--text-2xl);
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .policy-container h3 {
+            font-size: var(--text-lg);
+            color: var(--accent);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .policy-container p, .policy-container li {
+            line-height: 2;
+            text-align: justify;
+            opacity: 0.9;
+        }
+        .policy-container ul {
+            padding-right: 20px;
+        }
+        .policy-container .last-updated {
+            text-align: left;
+            margin-top: 40px;
+            font-size: var(--text-sm);
+            opacity: 0.7;
+        }
+        .policy-container .warning {
+            background-color: rgba(255, 165, 0, 0.1);
+            border-right: 4px solid orange;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="{{ url_for('index') }}" class="logo">
+                    <div class="logo-icon"><i class="fas fa-download"></i></div>
+                    <h1>تنزيل الفيديوهات</h1>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">الرئيسية</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="policy-container animate-fadeIn">
+                <h2>شروط الاستخدام</h2>
+
+                <p>مرحبًا بك في موقع "تنزيل الفيديوهات". باستخدامك لخدماتنا، فإنك توافق على الالتزام بهذه الشروط والأحكام. يرجى قراءتها بعناية.</p>
+
+                <h3>1. قبول الشروط</h3>
+                <p>باستخدام هذا الموقع، فإنك تقر بأنك قرأت وفهمت ووافقت على أن تكون ملزمًا بهذه الشروط. إذا كنت لا توافق على هذه الشروط، فيجب عليك عدم استخدام الموقع.</p>
+
+                <h3>2. وصف الخدمة</h3>
+                <p>يوفر موقعنا أداة تقنية تتيح للمستخدمين تنزيل الفيديوهات والصوتيات من منصات مختلفة على الإنترنت للاستخدام الشخصي فقط، وذلك عبر الروابط التي يقدمها المستخدم.</p>
+
+                <h3 class="warning">3. مسؤوليات المستخدم والسلوك المحظور</h3>
+                <p>أنت المسؤول الوحيد والكامل عن المحتوى الذي تقوم بتنزيله باستخدام خدماتنا. أنت توافق على عدم استخدام الخدمة في أي من الحالات التالية:</p>
+                <ul>
+                    <li><strong>تنزيل محتوى محمي بحقوق الطبع والنشر:</strong> يمنع منعًا باتًا استخدام الموقع لتنزيل أي مادة محمية بحقوق الطبع والنشر ما لم تكن تملك حقوقها أو لديك إذن صريح من صاحب الحقوق.</li>
+                    <li><strong>انتهاك شروط خدمة المواقع الأخرى:</strong> أنت توافق على احترام شروط الخدمة الخاصة بالمنصة التي تقوم بالتحميل منها (مثل يوتيوب، فيسبوك، تيك توك، وغيرها).</li>
+                    <li><strong>أي استخدام غير قانوني:</strong> لا يجوز استخدام الخدمة لأي غرض ينتهك القوانين المحلية أو الدولية.</li>
+                </ul>
+                <p>موقعنا مجرد وسيط تقني، ونحن لا نستضيف أي محتوى مقرصن على خوادمنا. أنت تتحمل كامل المسؤولية القانونية المترتبة على استخدامك للموقع.</p>
+
+                <h3>4. إخلاء المسؤولية عن الضمانات</h3>
+                <p>يتم توفير الخدمة "كما هي" و "كما هي متاحة" دون أي ضمانات من أي نوع، صريحة كانت أم ضمنية. نحن لا نضمن أن الخدمة ستكون متاحة دائمًا، أو آمنة، أو خالية من الأخطاء.</p>
+
+                <h3>5. تحديد المسؤولية</h3>
+                <p>لن يكون موقع "تنزيل الفيديوهات" أو أصحابه مسؤولين عن أي أضرار مباشرة أو غير مباشرة، عرضية أو تبعية، تنتج عن استخدامك أو عدم قدرتك على استخدام الخدمة، بما في ذلك أي مطالبات قانونية تتعلق بحقوق النشر.</p>
+                
+                <h3>6. التغييرات على الشروط</h3>
+                <p>نحتفظ بالحق في تعديل أو استبدال هذه الشروط في أي وقت. استمرارك في استخدام الموقع بعد نشر أي تغييرات يعتبر موافقة منك على الشروط الجديدة.</p>
+
+                <p class="last-updated">آخر تحديث: 5 يوليو 2025</p>
+            </div>
+        </div>
+    </main>
+    
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

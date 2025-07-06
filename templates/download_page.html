@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل - {{ video_info.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="aurora-background"></div>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <a href="{{ url_for('index') }}" class="logo">Downloader</a>
+                <div class="nav-links"><a href="{{ url_for('index') }}">العودة للرئيسية</a></div>
+            </nav>
+        </header>
+        <main>
+            <div class="bento-grid">
+                <div class="bento-box box-large">
+                    <div class="results-card">
+                        <img src="{{ video_info.thumbnail }}" alt="Video Thumbnail" class="video-thumbnail">
+                        <h2 class="video-title">{{ video_info.title }}</h2>
+                        <table class="formats-table">
+                            <thead>
+                                <tr><th>الجودة</th><th>الصيغة</th><th>ملاحظات</th><th>تحميل</th></tr>
+                            </thead>
+                            <tbody>
+                                {% for format in sorted_complete %}
+                                <tr>
+                                    <td><i class="fas fa-video"></i> {{ format.height }}p</td>
+                                    <td>{{ format.ext }}</td>
+                                    <td>صوت + صورة</td>
+                                    <td>
+                                        <button class="download-btn" data-format-id="{{ format.format_id }}" data-title="{{ video_info.title }}" data-ext="{{ format.ext }}">تحميل</button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                {% for v_format in sorted_video_only %}
+                                <tr>
+                                    <td><i class="fas fa-film"></i> {{ v_format.height }}p</td>
+                                    <td>{{ v_format.ext }}</td>
+                                    <td>فيديو فقط (سيتم الدمج)</td>
+                                    <td>
+                                        <button class="download-btn" 
+                                                data-vformat-id="{{ v_format.format_id }}"
+                                                data-aformat-id="{{ sorted_audio_only[0].format_id if sorted_audio_only else '' }}"
+                                                data-title="{{ video_info.title }}"
+                                                data-ext="mp4">
+                                            دمج وتحميل
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                
+                                {% for a_format in sorted_audio_only %}
+                                <tr>
+                                    <td><i class="fas fa-music"></i> صوت فقط</td>
+                                    <td>{{ a_format.ext }}</td>
+                                    <td>~{{ a_format.abr }}kbps</td>
+                                    <td>
+                                        <button class="download-btn"
+                                                data-format-id="{{ a_format.format_id }}"
+                                                data-title="{{ video_info.title }} (Audio)"
+                                                data-ext="{{ a_format.ext }}">
+                                            تحميل
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const USER_IP = "{{ user_ip }}";
+        const ORIGINAL_URL = "{{ original_url|urlencode }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/download_page.js') }}"></script>
+</body>
+</html>

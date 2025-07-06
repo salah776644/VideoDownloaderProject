@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنزيل الفيديوهات - المنصة الأكثر تطوراً للتحميل السريع والآمن</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="aurora-background"></div>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <a href="{{ url_for('index') }}" class="logo">Downloader</a>
+                <div class="nav-links">
+                    <a href="#how-it-works">كيف يعمل</a>
+                    <a href="#features">الميزات</a>
+                    <a href="#faq">أسئلة شائعة</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="bento-grid">
+                <div class="bento-box box-large hero-box">
+                    <h1 class="main-title">انطلق في عالم الفيديوهات بلا حدود!</h1>
+                    <p class="subtitle">اكتشف أسهل طريقة لتحميل فيديوهاتك المفضلة من يوتيوب، تيك توك، فيسبوك وأكثر من 1000 منصة! استمتع بجودة 4K وصوت نقي مع حماية خصوصيتك الكاملة.</p>
+                    
+                    <form action="{{ url_for('downloading_page') }}" method="GET" class="input-form">
+                        <input name="url" type="url" class="input-field" placeholder="الصق رابط الفيديو هنا..." required>
+                        <button type="submit" class="submit-btn">تحميل الآن <i class="fas fa-arrow-down"></i></button>
+                    </form>
+                    
+                    <div class="featured-stats">
+                        <div class="stat-item"><i class="fas fa-download"></i><span>+1 مليون تحميل شهرياً</span></div>
+                        <div class="stat-item"><i class="fas fa-users"></i><span>+500 ألف مستخدم سعيد</span></div>
+                        <div class="stat-item"><i class="fas fa-globe"></i><span>+1000 منصة مدعومة</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="how-it-works" class="content-section">
+                <h2 class="section-title">ثلاث خطوات بسيطة لتحميل أي فيديو</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-paste"></i></div>
+                        <h3>1. الصق الرابط</h3>
+                        <p>انسخ رابط الفيديو من أي منصة والصقه في الحقل المخصص أعلاه.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>2. اختر الجودة</h3>
+                        <p>سيقوم موقعنا بجلب جميع الصيغ المتاحة. اختر ما يناسبك.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                        <h3>3. حمّل مباشرة</h3>
+                        <p>اضغط على زر التحميل، وسيتم دمج الفيديو والصوت وحفظه على جهازك.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="content-section">
+                <h2 class="section-title">لماذا نحن الخيار الأفضل؟</h2>
+                <div class="bento-grid">
+                    <div class="bento-box box-small feature-box"><i class="fas fa-bolt feature-icon"></i><h3>سرعة فائقة</h3><p class="feature-text">خوادم سحابية متطورة تضمن لك تجربة تحميل سريعة وسلسة.</p></div>
+                    <div class="bento-box box-small feature-box"><i class="fas fa-shield-alt feature-icon"></i><h3>أمان وخصوصية</h3><p class="feature-text">حماية كاملة لبياناتك مع حذف فوري للملفات بعد مغادرة الصفحة.</p></div>
+                    <div class="bento-box box-small feature-box"><i class="fas fa-gem feature-icon"></i><h3>جودة 4K</h3><p class="feature-text">نقدم الفيديوهات بأعلى دقة متاحة مع دعم كامل للصوت عالي الجودة.</p></div>
+                    <div class="bento-box box-small feature-box"><i class="fas fa-infinity feature-icon"></i><h3>دعم غير محدود</h3><p class="feature-text">تحميل غير محدود من أكثر من 1000 منصة بدون أي رسوم خفية.</p></div>
+                    <div class="bento-box box-small feature-box"><i class="fas fa-mobile-alt feature-icon"></i><h3>متوافق مع الأجهزة</h3><p class="feature-text">يعمل على جميع الأجهزة دون الحاجة لتطبيقات إضافية.</p></div>
+                    <div class="bento-box box-small feature-box"><i class="fas fa-gift feature-icon"></i><h3>مجاني 100%</h3><p class="feature-text">استمتع بتحميل غير محدود بدون قيود أو إعلانات مزعجة.</p></div>
+                </div>
+            </section>
+
+            <section id="faq" class="content-section">
+                <h2 class="section-title">أسئلة شائعة</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question"><span>هل الخدمة مجانية حقاً؟</span><i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>نعم! الخدمة مجانية 100% بدون أي تكاليف أو رسوم خفية. نحن لا نطلب أي تسجيل أو دفع، ويمكنك استخدام الأداة بلا حدود.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question"><span>هل من الآمن استخدام هذه الأداة؟</span><i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>بالتأكيد. نحن نولي أهمية قصوى لخصوصيتك وأمانك. لا نخزن أي فيديوهات بعد التحميل، ولا نحتفظ بأي بيانات شخصية. جميع اتصالاتك مشفرة وملفاتك تحذف تلقائياً.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question"><span>لماذا يتم تحميل الفيديو بدون صوت في بعض المواقع؟</span><i class="fas fa-chevron-down"></i></button>
+                        <div class="faq-answer"><p>المنصات الكبرى تفصل الفيديو عالي الدقة عن الصوت. موقعنا يقوم تلقائيًا بتحميل كلا الملفين ودمجهما معًا باستخدام أداة FFmpeg لتقديم ملف فيديو كامل.</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>© 2025 Downloader. انضم إلى مجتمعنا السعيد واستمتع بتجربة تحميل لا مثيل لها.</p>
+                <div class="footer-links">
+                    <a href="{{ url_for('privacy_policy') }}">سياسة الخصوصية</a>
+                    <a href="{{ url_for('terms_of_use') }}">شروط الاستخدام</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
