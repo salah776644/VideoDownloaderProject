@@ -1,15 +1,32 @@
 import os
-import sys # <-- إضافة جديدة
+import sys
 import shutil
 import subprocess
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, url_for
 import yt_dlp
 
-# --- (بقية الكود يبقى كما هو) ---
+# --- إعداد التطبيق ---
 app = Flask(__name__)
 DOWNLOAD_FOLDER = 'temp_downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
+
+# --- دالة ذكية لاختيار ملف الكوكيز المناسب ---
+def get_cookies_file(url):
+    """
+    تحدد ملف الكوكيز الذي يجب استخدامه بناءً على رابط الفيديو.
+    """
+    if "youtube.com" in url or "youtu.be" in url:
+        return "youtube_cookies.txt"
+    elif "facebook.com" in url or "fb.watch" in url:
+        return "facebook_cookies.txt"
+    elif "instagram.com" in url:
+        return "instagram_cookies.txt"
+    else:
+        # لا تستخدم أي ملف كوكيز للمواقع الأخرى
+        return None
+
+# --- 1. المسارات الرئيسية للصفحات ---
 
 @app.route('/')
 def index():
@@ -21,21 +38,11 @@ def downloading_page():
     if not video_url:
         return redirect(url_for('index'))
 
-    # --- الكود الجديد والمهم: التحديث التلقائي لـ yt-dlp ---
+    # --- التحديث التلقائي لـ yt-dlp ---
     try:
-        print("-> Attempting to upgrade yt-dlp...")
-        # استخدام sys.executable لضمان استخدام نفس نسخة بايثون
-        subprocess.run(
-            [sys.executable, '-m', 'pip', 'install', '--upgrade', 'yt-dlp'],
-            check=True,
-            capture_output=True,
-            text=True
-        )
-        print("-> yt-dlp is up to date.")
+        subprocess.run([sys.executable, '-m', 'pip', 'install', '--upgrade', 'yt-dlp'], check=True)
     except Exception as update_e:
-        # طباعة الخطأ إذا فشل التحديث، لكن نستمر في المحاولة
-        print(f"Could not upgrade yt-dlp: {update_e.stderr}")
-    # ----------------------------------------------------
+        print(f"Could not upgrade yt-dlp: {update_e}")
 
     user_ip = request.remote_addr.replace(':', '_')
     user_folder = os.path.join(DOWNLOAD_FOLDER, user_ip)
@@ -43,7 +50,19 @@ def downloading_page():
         shutil.rmtree(user_folder)
     os.makedirs(user_folder)
 
-    ydl_opts = {'quiet': True, 'no_warnings': True, 'noplaylist': True}
+    # --- إعداد خيارات yt-dlp مع اختيار الكوكيز الديناميكي ---
+    ydl_opts = {
+        'quiet': True,
+        'no_warnings': True,
+        'noplaylist': True,
+    }
+    
+    cookies_file = get_cookies_file(video_url)
+    if cookies_file and os.path.exists(cookies_file):
+        ydl_opts['cookies'] = cookies_file
+        print(f"-> Using cookies file: {cookies_file}")
+    # --------------------------------------------------------
+
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             video_info = ydl.extract_info(video_url, download=False)
@@ -64,15 +83,18 @@ def downloading_page():
         return render_template('download_page.html', video_info=video_info, original_url=video_url, user_ip=user_ip,
                                sorted_complete=sorted_complete, sorted_video_only=sorted_video_only, sorted_audio_only=sorted_audio_only)
     except Exception as e:
-        print(f"Error fetching video info AFTER upgrade attempt: {e}")
+        print(f"Error fetching video info: {e}")
         return redirect(url_for('index'))
 
 # --- (بقية المسارات تبقى كما هي بدون أي تغيير) ---
+
 @app.route('/privacy-policy')
-def privacy_policy(): return render_template('privacy_policy.html')
+def privacy_policy():
+    return render_template('privacy_policy.html')
 
 @app.route('/terms-of-use')
-def terms_of_use(): return render_template('terms_of_use.html')
+def terms_of_use():
+    return render_template('terms_of_use.html')
 
 @app.route('/api/process-download')
 def process_download():
